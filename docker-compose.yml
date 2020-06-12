@@ -1,0 +1,26 @@
+version: '2.2'
+services:
+  node:
+    image: apquinit/adonisjs:latest
+    working_dir: /home/node/app
+    tty: true
+    ports:
+      - '8080:80'
+    volumes:
+      - './:/home/node/app'
+    links:
+      - mysql
+    depends_on:
+      - mysql
+  mysql:
+    ports:
+      - '3306:3306'
+    image: mysql:5.7
+    volumes:
+      - '~/.luiszanchi/data:/var/lib/mysql'
+    environment:
+      - TZ=America/Sao_Paulo
+      - MYSQL_DATABASE=teste
+      - MYSQL_USER=teste
+      - MYSQL_PASSWORD=teste
+      - MYSQL_ROOT_PASSWORD=teste
